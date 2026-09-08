@@ -1,0 +1,26 @@
+student_id,age,gender,school_type,parent_education,study_hours,attendance_percentage,internet_access,travel_time,extra_activities,study_method
+2787,19,male,private,post graduate,3.5,76.5,no,<15 min,no,group study
+9620,15,female,public,graduate,3.2,96.9,yes,15-30 min,yes,online videos
+10358,16,female,private,high school,4.7,63.8,yes,<15 min,no,notes
+2170,16,male,private,diploma,4.7,69.0,yes,15-30 min,yes,mixed
+1140,17,male,private,graduate,2.1,68.9,no,30-60 min,no,coaching
+4370,15,male,private,graduate,6.9,77.7,no,<15 min,yes,group study
+2716,15,female,public,high school,2.8,78.0,yes,>60 min,no,online videos
+9615,19,female,private,diploma,7.0,50.0,no,<15 min,yes,group study
+2876,16,female,private,diploma,3.7,58.3,yes,15-30 min,yes,notes
+3677,15,other,private,no formal,5.6,65.6,yes,<15 min,no,group study
+9126,19,female,public,graduate,3.1,83.1,no,30-60 min,yes,group study
+2647,19,male,public,no formal,4.0,74.9,yes,30-60 min,no,textbook
+9936,14,other,public,graduate,2.0,50.0,yes,15-30 min,no,notes
+5690,17,female,public,post graduate,0.5,85.0,yes,<15 min,yes,coaching
+6451,18,other,private,graduate,4.6,69.5,yes,15-30 min,no,mixed
+8571,16,male,public,diploma,5.6,100.0,yes,<15 min,yes,textbook
+5819,19,female,public,graduate,3.8,100.0,yes,>60 min,yes,online videos
+5642,18,female,private,diploma,4.0,61.4,yes,30-60 min,yes,mixed
+5748,19,male,private,diploma,8.0,51.0,yes,<15 min,no,textbook
+5563,15,female,private,no formal,4.8,74.2,yes,15-30 min,no,notes
+7560,18,female,private,no formal,3.5,57.4,yes,30-60 min,no,group study
+9109,15,male,public,high school,6.5,73.4,yes,<15 min,yes,notes
+3634,16,other,private,diploma,8.0,64.9,no,>60 min,no,coaching
+9861,18,male,public,diploma,7.1,92.4,yes,>60 min,yes,mixed
+944,18,male,private,no formal,0.5,76.1,yes,15-30 min,yes,textbook

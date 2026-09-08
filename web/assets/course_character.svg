@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBCFE8"/>
+      <stop offset="100%" stop-color="#F472B6"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8D5524"/>
+      <stop offset="100%" stop-color="#5C3317"/>
+    </linearGradient>
+    <filter id="charShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="200" height="160" rx="16" fill="url(#pinkGrad)"/>
+  <g filter="url(#charShadow)" transform="translate(35, 10)">
+    <!-- Raised Arms -->
+    <path d="M15,50 Q10,20 28,15 Q35,25 25,55 Z" fill="url(#skinGrad)"/>
+    <circle cx="28" cy="14" r="7" fill="url(#skinGrad)"/>
+    <path d="M115,50 Q120,20 102,15 Q95,25 105,55 Z" fill="url(#skinGrad)"/>
+    <circle cx="102" cy="14" r="7" fill="url(#skinGrad)"/>
+    <!-- Body / Hoodie -->
+    <path d="M35,65 Q65,55 95,65 L105,140 L25,140 Z" fill="#1E293B"/>
+    <!-- Head -->
+    <circle cx="65" cy="42" r="22" fill="url(#skinGrad)"/>
+    <!-- Hair -->
+    <path d="M43,38 Q65,15 87,38 Q78,20 65,22 Q50,20 43,38 Z" fill="#0F172A"/>
+    <!-- Happy Eyes & Smile -->
+    <circle cx="58" cy="40" r="3" fill="#FFF"/>
+    <circle cx="59" cy="40" r="1.5" fill="#000"/>
+    <circle cx="72" cy="40" r="3" fill="#FFF"/>
+    <circle cx="73" cy="40" r="1.5" fill="#000"/>
+    <path d="M57,49 Q65,58 73,49 Z" fill="#FFF"/>
+    <!-- Celebration stars -->
+    <path d="M10,25 L12,20 L17,22 L13,26 L15,31 L10,28 L5,31 L7,26 L3,22 L8,20 Z" fill="#FDE047" opacity="0.9"/>
+    <path d="M120,30 L121,26 L125,27 L122,30 L124,34 L120,32 L116,34 L118,30 L115,27 L119,26 Z" fill="#FDE047" opacity="0.9"/>
+  </g>
+</svg>

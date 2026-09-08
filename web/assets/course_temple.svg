@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="50%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
+    </linearGradient>
+    <linearGradient id="goldDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#A16207"/>
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#BFDBFE"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <rect width="200" height="160" rx="16" fill="url(#skyGrad)"/>
+  <g filter="url(#softShadow)" transform="translate(25, 20)">
+    <!-- Roof Triangular Pediment -->
+    <polygon points="75,10 15,40 135,40" fill="url(#goldGrad)"/>
+    <polygon points="75,14 25,38 125,38" fill="url(#goldDark)" opacity="0.3"/>
+    <!-- Crest Emblem -->
+    <circle cx="75" cy="28" r="7" fill="#FEF08A"/>
+    <path d="M72,28 L75,23 L78,28 Z" fill="#CA8A04"/>
+    <!-- Entablature -->
+    <rect x="18" y="40" width="114" height="10" rx="2" fill="url(#goldDark)"/>
+    <!-- Columns -->
+    <rect x="26" y="50" width="12" height="50" rx="3" fill="url(#goldGrad)"/>
+    <rect x="52" y="50" width="12" height="50" rx="3" fill="url(#goldGrad)"/>
+    <rect x="86" y="50" width="12" height="50" rx="3" fill="url(#goldGrad)"/>
+    <rect x="112" y="50" width="12" height="50" rx="3" fill="url(#goldGrad)"/>
+    <!-- Column details -->
+    <line x1="32" y1="52" x2="32" y2="98" stroke="#CA8A04" stroke-width="1.5" opacity="0.5"/>
+    <line x1="58" y1="52" x2="58" y2="98" stroke="#CA8A04" stroke-width="1.5" opacity="0.5"/>
+    <line x1="92" y1="52" x2="92" y2="98" stroke="#CA8A04" stroke-width="1.5" opacity="0.5"/>
+    <line x1="118" y1="52" x2="118" y2="98" stroke="#CA8A04" stroke-width="1.5" opacity="0.5"/>
+    <!-- Base Steps -->
+    <rect x="12" y="100" width="126" height="10" rx="3" fill="url(#goldDark)"/>
+    <rect x="6" y="110" width="138" height="12" rx="4" fill="url(#goldGrad)"/>
+  </g>
+</svg>

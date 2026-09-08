@@ -1,0 +1,144 @@
+{
+    "metadata": {
+        "best_model_name": "stacking_ensemble",
+        "best_f1_score": 0.9983329717792935,
+        "target_scheme": "3-tier",
+        "selected_features": [
+            "stem_avg",
+            "english_score",
+            "min_score",
+            "max_score",
+            "math_score",
+            "science_score"
+        ],
+        "all_features": [
+            "age",
+            "study_hours",
+            "attendance_percentage",
+            "math_score",
+            "science_score",
+            "english_score",
+            "academic_dedication",
+            "low_attendance_risk",
+            "high_study_effort",
+            "stem_avg",
+            "score_std",
+            "min_score",
+            "max_score",
+            "gender_female",
+            "gender_male",
+            "gender_other",
+            "school_type_private",
+            "school_type_public",
+            "parent_education_diploma",
+            "parent_education_graduate",
+            "parent_education_high school",
+            "parent_education_no formal",
+            "parent_education_phd",
+            "parent_education_post graduate",
+            "internet_access_no",
+            "internet_access_yes",
+            "travel_time_15-30 min",
+            "travel_time_30-60 min",
+            "travel_time_<15 min",
+            "travel_time_>60 min",
+            "extra_activities_no",
+            "extra_activities_yes",
+            "study_method_coaching",
+            "study_method_group study",
+            "study_method_mixed",
+            "study_method_notes",
+            "study_method_online videos",
+            "study_method_textbook"
+        ],
+        "class_names": [
+            "At-Risk",
+            "Distinction",
+            "Pass"
+        ],
+        "feature_selection_method": "consensus"
+    },
+    "models": {
+        "logistic_regression": {
+            "cv_f1_mean": 0.994751561498842,
+            "cv_acc_mean": 0.99475,
+            "test_accuracy": 0.9966666666666667,
+            "test_f1_weighted": 0.9966657002869155,
+            "test_precision_weighted": 0.996669658879205,
+            "test_recall_weighted": 0.9966666666666667,
+            "roc_auc": 0.9999754796433311
+        },
+        "decision_tree": {
+            "cv_f1_mean": 0.9906691439251614,
+            "cv_acc_mean": 0.9906666666666666,
+            "test_accuracy": 0.991,
+            "test_f1_weighted": 0.9910041172933395,
+            "test_precision_weighted": 0.9910359922914148,
+            "test_recall_weighted": 0.991,
+            "roc_auc": 0.9955695886283562
+        },
+        "random_forest": {
+            "cv_f1_mean": 0.993416635681497,
+            "cv_acc_mean": 0.9934166666666666,
+            "test_accuracy": 0.9963333333333333,
+            "test_f1_weighted": 0.9963321467164017,
+            "test_precision_weighted": 0.9963337308114035,
+            "test_recall_weighted": 0.9963333333333333,
+            "roc_auc": 0.9999768231693594
+        },
+        "support_vector_machine": {
+            "cv_f1_mean": 0.9947519965382794,
+            "cv_acc_mean": 0.99475,
+            "test_accuracy": 0.9963333333333333,
+            "test_f1_weighted": 0.9963336155363938,
+            "test_precision_weighted": 0.9963364878171735,
+            "test_recall_weighted": 0.9963333333333333,
+            "roc_auc": 0.9999765944244867
+        },
+        "k_nearest_neighbors": {
+            "cv_f1_mean": 0.9933346961617218,
+            "cv_acc_mean": 0.9933333333333334,
+            "test_accuracy": 0.9963333333333333,
+            "test_f1_weighted": 0.9963318226149498,
+            "test_precision_weighted": 0.9963362091075675,
+            "test_recall_weighted": 0.9963333333333333,
+            "roc_auc": 0.9999764424782698
+        },
+        "xgboost": {
+            "cv_f1_mean": 0.994667397911428,
+            "cv_acc_mean": 0.9946666666666667,
+            "test_accuracy": 0.996,
+            "test_f1_weighted": 0.9960002960077352,
+            "test_precision_weighted": 0.9960060944939978,
+            "test_recall_weighted": 0.996,
+            "roc_auc": 0.9999752780108426
+        },
+        "multi_layer_perceptron": {
+            "cv_f1_mean": 0.9911612468765932,
+            "cv_acc_mean": 0.9911666666666668,
+            "test_accuracy": 0.9943333333333333,
+            "test_f1_weighted": 0.9943314195175786,
+            "test_precision_weighted": 0.9943408830225412,
+            "test_recall_weighted": 0.9943333333333333,
+            "roc_auc": 0.9999436274806843
+        },
+        "voting_ensemble": {
+            "cv_f1_mean": 0.9950009137354261,
+            "cv_acc_mean": 0.9949999999999999,
+            "test_accuracy": 0.9973333333333333,
+            "test_f1_weighted": 0.9973331872458605,
+            "test_precision_weighted": 0.9973344890070348,
+            "test_recall_weighted": 0.9973333333333333,
+            "roc_auc": 0.9999866090639994
+        },
+        "stacking_ensemble": {
+            "cv_f1_mean": 0.9955838885447129,
+            "cv_acc_mean": 0.9955833333333335,
+            "test_accuracy": 0.9983333333333333,
+            "test_f1_weighted": 0.9983329717792935,
+            "test_precision_weighted": 0.9983353858278509,
+            "test_recall_weighted": 0.9983333333333333,
+            "roc_auc": 0.9999935377847295
+        }
+    }
+}

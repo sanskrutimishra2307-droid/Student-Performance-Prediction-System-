@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA EDTECH — AI Student Performance & Learning Intelligence Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js CDN for clean, responsive data visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Outer Framed Application Viewport (Matching Reference UI) -->
+  <div class="app-viewport">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="app-sidebar">
+      <div>
+        <!-- Brand Logo -->
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#00a88f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+          <h1>UNIVERSITY</h1>
+        </div>
+
+        <!-- Student Profile Selector Pill -->
+        <div class="student-profile-pill" id="studentProfilePill">
+          <img src="assets/avatar_michael.svg" alt="Student Avatar" class="student-profile-avatar" id="activeStudentAvatar">
+          <div class="student-profile-info">
+            <div class="student-profile-name">
+              <span id="activeStudentName">Michael</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="student-profile-role" id="activeStudentRole">Steady Performer</div>
+          </div>
+          <!-- Dropdown menu -->
+          <div class="profile-dropdown-menu" id="profileDropdownMenu"></div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav>
+          <ul class="nav-menu">
+            <li>
+              <a href="#dashboard" class="nav-item active" data-tab="dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#courses" class="nav-item" data-tab="courses">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                Courses
+              </a>
+            </li>
+            <li>
+              <a href="#performance" class="nav-item" data-tab="performance">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                Statistic
+              </a>
+            </li>
+            <li>
+              <a href="#simulator" class="nav-item" data-tab="simulator">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                </svg>
+                AI Predictor
+              </a>
+            </li>
+            <li>
+              <a href="#recommendations" class="nav-item" data-tab="recommendations">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                Action Plan
+              </a>
+            </li>
+            <li>
+              <a href="#onboarding" class="nav-item" data-tab="onboarding">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="8.5" cy="7.5" r="4"></circle>
+                  <line x1="20" y1="8" x2="20" y2="14"></line>
+                  <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+                Registration
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Bottom 3D Gift Box Card (Matching Reference UI) -->
+      <div class="sidebar-bottom-card">
+        <img src="assets/gift_box.svg" alt="AI Intelligence Report" class="sidebar-bottom-img">
+        <button class="sidebar-btn-download" onclick="exportStudentReport()">Download report</button>
+        <a href="#support" class="sidebar-link-support" onclick="showToast('AI Academic Support Mentor is active 24/7.')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+          Need support
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN APP CANVAS -->
+    <main class="app-main">
+      
+      <!-- Top Navigation Bar -->
+      <header class="top-navbar">
+        <div class="search-box-container">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" placeholder="Courses, books, teachers, performance insights...">
+        </div>
+
+        <div class="top-navbar-actions">
+          <button class="icon-action-btn" title="Messages" onclick="showToast('💬 No unread academic advisor messages.')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </button>
+          
+          <button class="icon-action-btn" title="Notifications" onclick="showToast('🔔 1 High Priority: Math Quiz scheduled for Aug 10.')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <div class="badge-notification">1</div>
+          </button>
+
+          <div class="user-profile-badge" onclick="switchTab('simulator')">
+            <img src="assets/avatar_michael.svg" alt="User Profile" id="topUserAvatar">
+            <span id="topUserName">Michael Brown</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Page Content Area -->
+      <div class="page-content-area">
+
+        <!-- ================================================================= -->
+        <!-- TAB 1: DASHBOARD VIEW (Exact match with Reference UI) -->
+        <!-- ================================================================= -->
+        <section id="view-dashboard" class="tab-view active">
+          
+          <div class="section-header">
+            <h2 class="section-header-title" id="greetingTitle">Dashboard</h2>
+            <div class="section-header-actions">
+              <button class="pill-btn-subtle" onclick="switchTab('performance')">Full statistic</button>
+              <button class="pill-btn-subtle" onclick="switchTab('recommendations')">All offers</button>
+            </div>
+          </div>
+
+          <!-- Hero Performance Row (Teal Card + Pink Highlight Card) -->
+          <div class="hero-performance-row">
+            
+            <!-- Teal Performance Banner -->
+            <div class="hero-teal-card">
+              
+              <!-- Circular GPA Dial -->
+              <div class="gpa-dial-container">
+                <div class="gpa-dial-inner">
+                  <div class="gpa-dial-grade" id="heroGpaGrade">A-</div>
+                  <div class="gpa-dial-label">GPA</div>
+                </div>
+              </div>
+
+              <!-- Summary Stats Box -->
+              <div class="hero-stats-box">
+                <div class="hero-stat-item">
+                  <div class="stat-item-label">Homeworks</div>
+                  <div class="stat-item-value-row">
+                    <span>Completed: <strong id="heroHwCompleted">80/120</strong></span>
+                    <span class="stat-alert-badge">5</span>
+                  </div>
+                </div>
+                <div class="hero-stat-item">
+                  <div class="stat-item-label">Exams</div>
+                  <div class="stat-item-value-row">
+                    <span>Completed: <strong id="heroExamsCompleted">5/12</strong></span>
+                    <span class="stat-alert-badge">1</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Vertical Grade Distribution Capsule Bars -->
+              <div class="hero-vertical-bars-container">
+                <div class="vertical-bar-column">
+                  <span class="vertical-bar-pct">60%</span>
+                  <div class="vertical-bar-track">
+                    <div class="vertical-bar-fill" id="vbarFillA" style="height: 60%;"></div>
+                  </div>
+                  <div class="vertical-bar-badge">A</div>
+                </div>
+                <div class="vertical-bar-column">
+                  <span class="vertical-bar-pct">20%</span>
+                  <div class="vertical-bar-track">
+                    <div class="vertical-bar-fill" id="vbarFillB" style="height: 35%;"></div>
+                  </div>
+                  <div class="vertical-bar-badge">B</div>
+                </div>
+                <div class="vertical-bar-column">
+                  <span class="vertical-bar-pct">15%</span>
+                  <div class="vertical-bar-track">
+                    <div class="vertical-bar-fill" id="vbarFillC" style="height: 25%;"></div>
+                  </div>
+                  <div class="vertical-bar-badge">C</div>
+                </div>
+                <div class="vertical-bar-column">
+                  <span class="vertical-bar-pct">3%</span>
+                  <div class="vertical-bar-track">
+                    <div class="vertical-bar-fill" id="vbarFillD" style="height: 10%;"></div>
+                  </div>
+                  <div class="vertical-bar-badge">D</div>
+                </div>
+                <div class="vertical-bar-column">
+                  <span class="vertical-bar-pct">1%</span>
+                  <div class="vertical-bar-track">
+                    <div class="vertical-bar-fill" id="vbarFillF" style="height: 5%;"></div>
+                  </div>
+                  <div class="vertical-bar-badge">F</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Pink/Purple AI Highlight Card -->
+            <div class="hero-promo-card">
+              <div>
+                <span class="promo-tag">AI Recommendation</span>
+                <h3 class="promo-title" id="heroPromoTitle">Targeting +8% GPA with Calculus Coaching!</h3>
+              </div>
+              <button class="promo-btn-action" onclick="switchTab('simulator')">
+                <span>Try Simulator!</span>
+                <span class="promo-pill-pct">Live ML</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Lower Section: Courses In Progress & Upcoming Exams -->
+          <div class="dashboard-lower-grid">
+            
+            <!-- Left Column: Courses In Progress -->
+            <div>
+              <div class="courses-container-header">
+                <div class="courses-title-group">
+                  <h2>Courses</h2>
+                  <div class="status-dropdown-pill">
+                    In progress
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div class="courses-header-controls">
+                  <a href="#courses" class="link-subtle" onclick="switchTab('courses')">All courses</a>
+                  <button class="arrow-nav-btn" title="Previous">&lt;</button>
+                  <button class="arrow-nav-btn" title="Next">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Course Cards Row -->
+              <div class="course-cards-row">
+                
+                <!-- Course Card 1: 3D Temple Illustration -->
+                <div class="course-card">
+                  <div>
+                    <div class="course-card-top-image">
+                      <img src="assets/course_temple.svg" alt="Mathematics and 3D Modeling">
+                      <button class="card-menu-btn">•••</button>
+                    </div>
+                    <h3 class="course-card-title">Modern and Contemporary 3D Design and Modeling</h3>
+                    <div class="course-card-meta-row">
+                      <span class="course-gpa-tag" id="course1Gpa">GPA: A+</span>
+                      <div class="course-instructor-pill">
+                        <img src="assets/avatar_instructor1.svg" alt="Instructor">
+                        Oliver Smith
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="course-card-stats-grid">
+                      <div class="course-stat-val">Lessons: <strong>7/10</strong></div>
+                      <div class="course-stat-val">Assignment: <strong>8/12</strong></div>
+                      <div class="course-stat-val">Last score: <strong>A</strong></div>
+                      <div class="course-stat-val">Time: <strong>25h</strong></div>
+                    </div>
+                    <div class="course-progress-bar-container">
+                      <div class="course-progress-track">
+                        <div class="course-progress-fill" id="course1Progress" style="width: 70%;"></div>
+                      </div>
+                      <span class="course-progress-pct" id="course1Pct">70%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Course Card 2: 3D Student Character -->
+                <div class="course-card">
+                  <div>
+                    <div class="course-card-top-image">
+                      <img src="assets/course_character.svg" alt="Applied Science">
+                      <button class="card-menu-btn">•••</button>
+                    </div>
+                    <h3 class="course-card-title">The University of Sydney Positive Psychiatry and Science</h3>
+                    <div class="course-card-meta-row">
+                      <span class="course-gpa-tag" id="course2Gpa" style="color:#d97706">GPA: B+</span>
+                      <div class="course-instructor-pill">
+                        <img src="assets/avatar_instructor2.svg" alt="Instructor">
+                        James Johnson
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="course-card-stats-grid">
+                      <div class="course-stat-val">Lessons: <strong>5/10</strong></div>
+                      <div class="course-stat-val">Assignment: <strong>4/8</strong></div>
+                      <div class="course-stat-val">Last score: <strong>B</strong></div>
+                      <div class="course-stat-val">Time: <strong>32h</strong></div>
+                    </div>
+                    <div class="course-progress-bar-container">
+                      <div class="course-progress-track">
+                        <div class="course-progress-fill" id="course2Progress" style="width: 50%;"></div>
+                      </div>
+                      <span class="course-progress-pct" id="course2Pct">50%</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right Column: Exams & Homeworks List -->
+            <div class="exams-homeworks-container">
+              <div class="exams-header-row">
+                <div class="exams-tab-switcher">
+                  <button class="exams-tab-btn active" id="tabBtnExams">Exams</button>
+                  <button class="exams-tab-btn" id="tabBtnHomeworks">Homeworks</button>
+                </div>
+                <a href="#all" class="link-subtle" onclick="showToast('Displaying 5 upcoming assessments.')">All exams</a>
+              </div>
+
+              <!-- Upcoming Item Cards -->
+              <div class="upcoming-items-list" id="upcomingItemsList">
+                <div class="upcoming-item-card">
+                  <div class="date-badge">
+                    <div class="date-badge-day">10</div>
+                    <div class="date-badge-month">August</div>
+                  </div>
+                  <div class="upcoming-item-details">
+                    <div class="upcoming-item-title">Psychological First Aid</div>
+                    <div class="upcoming-item-desc">Learn to provide psychological first aid to people in an...</div>
+                  </div>
+                  <div class="upcoming-item-time">
+                    03:00 PM
+                    <img src="assets/avatar_instructor1.svg" alt="Instructor">
+                  </div>
+                </div>
+
+                <div class="upcoming-item-card">
+                  <div class="date-badge">
+                    <div class="date-badge-day">8</div>
+                    <div class="date-badge-month">June</div>
+                  </div>
+                  <div class="upcoming-item-details">
+                    <div class="upcoming-item-title">Graphic Design & Vectors</div>
+                    <div class="upcoming-item-desc">The goal of this specialization is to equip learners with a set...</div>
+                  </div>
+                  <div class="upcoming-item-time">
+                    11:00 AM
+                    <img src="assets/avatar_instructor2.svg" alt="Instructor">
+                  </div>
+                </div>
+
+                <div class="upcoming-item-card">
+                  <div class="date-badge alert">
+                    <div class="date-badge-day">2</div>
+                    <div class="date-badge-month">June</div>
+                  </div>
+                  <div class="upcoming-item-details">
+                    <div class="upcoming-item-title">Creative Technical Writing</div>
+                    <div class="upcoming-item-desc">This specialization covers elements of three major...</div>
+                  </div>
+                  <div class="upcoming-item-time">
+                    <span style="color:#ef4444;font-size:10px;font-weight:800">RETAKE</span>
+                    <img src="assets/avatar_instructor1.svg" alt="Instructor">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 2: COURSES & LEARNING VIEW -->
+        <!-- ================================================================= -->
+        <section id="view-courses" class="tab-view">
+          <div class="section-header">
+            <h2 class="section-header-title">Continue Learning & Course Catalog</h2>
+            <div class="section-header-actions">
+              <button class="pill-btn-subtle" onclick="showToast('Enrolled in 4 active academic tracks.')">4 Active Tracks</button>
+            </div>
+          </div>
+
+          <div class="dashboard-lower-grid">
+            <div class="course-cards-row" style="grid-template-columns: 1fr 1fr; width: 100%;">
+              <!-- Card 1 -->
+              <div class="course-card">
+                <div class="course-card-top-image">
+                  <img src="assets/course_temple.svg" alt="Mathematics">
+                </div>
+                <h3 class="course-card-title">Higher Mathematics & Algorithmic Calculus</h3>
+                <div class="course-card-meta-row">
+                  <span class="course-gpa-tag">GPA: A (88%)</span>
+                  <div class="course-instructor-pill">Prof. Oliver Smith</div>
+                </div>
+                <div class="course-progress-bar-container">
+                  <div class="course-progress-track"><div class="course-progress-fill" style="width: 85%;"></div></div>
+                  <span class="course-progress-pct">85%</span>
+                </div>
+              </div>
+              <!-- Card 2 -->
+              <div class="course-card">
+                <div class="course-card-top-image">
+                  <img src="assets/course_character.svg" alt="Physics">
+                </div>
+                <h3 class="course-card-title">Applied Physics, Optics & Laboratory Experiments</h3>
+                <div class="course-card-meta-row">
+                  <span class="course-gpa-tag" style="color:#d97706">GPA: B+ (76%)</span>
+                  <div class="course-instructor-pill">Dr. James Johnson</div>
+                </div>
+                <div class="course-progress-bar-container">
+                  <div class="course-progress-track"><div class="course-progress-fill" style="width: 60%;"></div></div>
+                  <span class="course-progress-pct">60%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-panel">
+              <h3 style="font-size:16px;font-weight:800;margin-bottom:12px;">AI Recommended Topic Modules</h3>
+              <p style="font-size:13px;color:#64748b;margin-bottom:16px;">Based on your recent exam diagnostics in Mathematics and Science:</p>
+              
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="padding:12px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;">
+                  <div style="font-size:13px;font-weight:800;color:#1e293b">📚 Differential Equations Practice Set</div>
+                  <div style="font-size:11px;color:#64748b;margin-top:2px;">Target boost: +4.5 points in Calculus • 45 mins</div>
+                </div>
+                <div style="padding:12px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;">
+                  <div style="font-size:13px;font-weight:800;color:#1e293b">🔬 Thermodynamics Simulation Lab</div>
+                  <div style="font-size:11px;color:#64748b;margin-top:2px;">Interactive physics module • 30 mins</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 3: PERFORMANCE ANALYSIS (Dataset-Driven Tabs) -->
+        <!-- ================================================================= -->
+        <section id="view-performance" class="tab-view">
+          <div class="section-header">
+            <h2 class="section-header-title">Dataset Performance Analysis</h2>
+            <span style="font-size:13px;color:#64748b;font-weight:600">Based on 15,000 Verified Kaggle Student Records</span>
+          </div>
+
+          <!-- Clean Segmented Tabs (No chart clutter) -->
+          <div class="analysis-segmented-tabs">
+            <button class="analysis-tab-btn active" data-analysis-tab="hours">Study Hours vs Score</button>
+            <button class="analysis-tab-btn" data-analysis-tab="attendance">Attendance Impact</button>
+            <button class="analysis-tab-btn" data-analysis-tab="method">Study Method Efficacy</button>
+            <button class="analysis-tab-btn" data-analysis-tab="subjects">Subject Profile Radar</button>
+            <button class="analysis-tab-btn" data-analysis-tab="features">ML Feature Importance</button>
+          </div>
+
+          <!-- Chart Display Area -->
+          <div class="chart-canvas-container">
+            <canvas id="analyticsMainChart"></canvas>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 4: AI PREDICTOR & WHAT-IF SIMULATOR STUDIO -->
+        <!-- ================================================================= -->
+        <section id="view-simulator" class="tab-view">
+          <div class="section-header">
+            <h2 class="section-header-title">AI Performance Predictor & What-If Studio</h2>
+            <div id="mlStatusBadge" class="ml-status-pill active">🟢 <strong>Live ML Engine Connected</strong> • Stacking Meta-Learner (99.67% Test Accuracy)</div>
+          </div>
+
+          <div class="ai-insights-grid">
+            
+            <!-- Left: AI Intelligence & Real Machine Learning Output Panel -->
+            <div class="glass-panel">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <h3 style="font-size:16px;font-weight:800;color:#1e293b;">🔮 Stacking Ensemble Classification</h3>
+                <span id="xaiUrgencyBadge" class="urgency-badge urgency-low">STANDARD MONITORING</span>
+              </div>
+
+              <div class="metric-comparison-grid">
+                <div class="metric-box">
+                  <div class="metric-box-title">Predicted Academic Outcome</div>
+                  <div class="metric-box-val text-green" id="simPredTier">DISTINCTION</div>
+                </div>
+                <div class="metric-box">
+                  <div class="metric-box-title">Model Confidence</div>
+                  <div class="metric-box-val" id="simPredConf" style="color:#00a88f">94.8%</div>
+                </div>
+              </div>
+
+              <!-- Multi-Class Probability Meters -->
+              <div class="ml-probabilities-container">
+                <div style="font-size:12px;font-weight:800;color:#1e293b;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px">Multi-Class Probability Distribution</div>
+                
+                <div class="prob-row">
+                  <div class="prob-header">
+                    <span>🏆 Distinction (High Honors)</span>
+                    <strong id="probValDistinction">60.7%</strong>
+                  </div>
+                  <div class="prob-track">
+                    <div class="prob-fill green" id="probBarDistinction" style="width: 60.7%;"></div>
+                  </div>
+                </div>
+
+                <div class="prob-row">
+                  <div class="prob-header">
+                    <span>📘 Pass (Standard Standing)</span>
+                    <strong id="probValPass">38.4%</strong>
+                  </div>
+                  <div class="prob-track">
+                    <div class="prob-fill blue" id="probBarPass" style="width: 38.4%;"></div>
+                  </div>
+                </div>
+
+                <div class="prob-row">
+                  <div class="prob-header">
+                    <span>⚠️ At-Risk (Vulnerable)</span>
+                    <strong id="probValRisk">0.9%</strong>
+                  </div>
+                  <div class="prob-track">
+                    <div class="prob-fill red" id="probBarRisk" style="width: 0.9%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Consensus Features Fed into Model -->
+              <div style="margin-top:14px;">
+                <div style="font-size:11.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.5px">Consensus Features Fed to Model</div>
+                <div class="feature-chips-container" id="modelFeaturesList">
+                  <span class="feature-chip">✓ stem avg</span>
+                  <span class="feature-chip">✓ english score</span>
+                  <span class="feature-chip">✓ min score</span>
+                  <span class="feature-chip">✓ max score</span>
+                  <span class="feature-chip">✓ math score</span>
+                  <span class="feature-chip">✓ science score</span>
+                </div>
+              </div>
+
+              <!-- XAI Diagnostic & Risk Factors -->
+              <div style="margin-top:18px;border-top:1px solid #e2e8f0;padding-top:14px;">
+                <div style="font-size:12.5px;font-weight:800;color:#1e293b;margin-bottom:6px;">Explainable AI (XAI) Diagnostic</div>
+                <p style="font-size:12px;color:#64748b;margin-bottom:12px;" id="xaiSummaryText">Student demonstrates exemplary performance indicators across key subjects.</p>
+                
+                <div style="font-size:11px;font-weight:700;color:#ef4444;text-transform:uppercase;margin-bottom:4px;">Risk Vulnerabilities</div>
+                <div id="xaiRiskList"></div>
+
+                <div style="font-size:11px;font-weight:700;color:#10b981;text-transform:uppercase;margin:10px 0 4px 0;">Positive Performance Drivers</div>
+                <div id="xaiPositiveList"></div>
+
+                <div style="font-size:11px;font-weight:700;color:#00a88f;text-transform:uppercase;margin:10px 0 6px 0;">Recommended AI Interventions</div>
+                <div id="xaiInterventionsList"></div>
+              </div>
+
+            </div>
+
+            <!-- Right: Interactive Sliders Control Panel -->
+            <div class="glass-panel">
+              <span class="panel-header-badge badge-actual">⚙️ What-If Simulation Parameters</span>
+              <h3 style="font-size:16px;font-weight:800;color:#1e293b;margin:6px 0 4px 0;">Adjust Student Attributes</h3>
+              <p style="font-size:12px;color:#64748b;">Modify values below and trigger the live Machine Learning model to observe real-time inference.</p>
+
+              <div class="simulator-slider-group">
+                
+                <div class="slider-row">
+                  <div class="slider-label-val">
+                    <span>Daily Study Hours</span>
+                    <span id="lblSimHours" style="color:#00a88f">4.5 hrs/day</span>
+                  </div>
+                  <input type="range" class="custom-range-slider" id="simStudyHours" min="0" max="10" step="0.5" value="4.5" oninput="updateSliderLabelsOnly()">
+                </div>
+
+                <div class="slider-row">
+                  <div class="slider-label-val">
+                    <span>Attendance Rate</span>
+                    <span id="lblSimAtt" style="color:#00a88f">82%</span>
+                  </div>
+                  <input type="range" class="custom-range-slider" id="simAttendance" min="40" max="100" step="1" value="82" oninput="updateSliderLabelsOnly()">
+                </div>
+
+                <div class="slider-row">
+                  <div class="slider-label-val">
+                    <span>Mathematics Score</span>
+                    <span id="lblSimMath" style="color:#00a88f">68 pts</span>
+                  </div>
+                  <input type="range" class="custom-range-slider" id="simMath" min="20" max="100" step="1" value="68" oninput="updateSliderLabelsOnly()">
+                </div>
+
+                <div class="slider-row">
+                  <div class="slider-label-val">
+                    <span>Science Score</span>
+                    <span id="lblSimSci" style="color:#00a88f">76 pts</span>
+                  </div>
+                  <input type="range" class="custom-range-slider" id="simScience" min="20" max="100" step="1" value="76" oninput="updateSliderLabelsOnly()">
+                </div>
+
+                <div class="slider-row">
+                  <div class="slider-label-val">
+                    <span>English Score</span>
+                    <span id="lblSimEng" style="color:#00a88f">82 pts</span>
+                  </div>
+                  <input type="range" class="custom-range-slider" id="simEnglish" min="20" max="100" step="1" value="82" oninput="updateSliderLabelsOnly()">
+                </div>
+
+                <div class="slider-row">
+                  <div class="slider-label-val">
+                    <span>Primary Study Method</span>
+                  </div>
+                  <select class="form-select" id="simMethod" style="background:#ffffff">
+                    <option value="notes">Structured Notes & Summaries</option>
+                    <option value="coaching">Active Coaching & Tutoring (+14% Boost)</option>
+                    <option value="online videos">Online Video Lessons & Practice (+9% Boost)</option>
+                    <option value="mixed">Mixed Multimodal Study</option>
+                    <option value="group study">Peer Group Study</option>
+                    <option value="textbook">Passive Textbook Reading</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <button type="button" class="btn-run-predict" id="btnRunMlPredict" onclick="runMachineLearningPrediction()">
+                <span>⚡</span> Run AI Machine Learning Prediction
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 5: ACTION PLAN & RECOMMENDATIONS -->
+        <!-- ================================================================= -->
+        <section id="view-recommendations" class="tab-view">
+          <div class="section-header">
+            <h2 class="section-header-title">Prescriptive Academic Action Plan</h2>
+            <span style="font-size:13px;color:#64748b;font-weight:600">Actionable guidance generated for the active student</span>
+          </div>
+
+          <div class="recommendations-grid">
+            
+            <!-- Card 1 -->
+            <div class="recommendation-card">
+              <div>
+                <span class="rec-priority-tag tag-high">🔴 High Priority</span>
+                <h3 class="rec-title">Bridge Mathematics Gap</h3>
+                <p class="rec-desc">Your Math score (68) is currently lagging behind Science (76) and English (82). Dedicate 45 minutes daily to problem set drills to reach the 80+ honors threshold.</p>
+              </div>
+              <div class="rec-impact-pill">🚀 Expected Impact: +6.5% Overall Score</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="recommendation-card">
+              <div>
+                <span class="rec-priority-tag tag-medium">🟡 Medium Priority</span>
+                <h3 class="rec-title">Upgrade Study Method</h3>
+                <p class="rec-desc">Switching from passive note-reading to active recall with online video problem sets can elevate long-term retention by 22% based on cohort dataset trends.</p>
+              </div>
+              <div class="rec-impact-pill">📈 Expected Impact: +4.0% Overall Score</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="recommendation-card">
+              <div>
+                <span class="rec-priority-tag tag-habit">🟢 Sustainable Habit</span>
+                <h3 class="rec-title">Maintain Attendance Streak</h3>
+                <p class="rec-desc">Your attendance of 82% is healthy. Sustaining above 80% guarantees maximum classroom credit and keeps you in the top 15% academic tier.</p>
+              </div>
+              <div class="rec-impact-pill">🛡️ Status: Protected & On Track</div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 6: STUDENT REGISTRATION / ONBOARDING FLOW -->
+        <!-- ================================================================= -->
+        <section id="view-onboarding" class="tab-view">
+          <div class="section-header">
+            <h2 class="section-header-title">Student Onboarding & AI Profile Setup</h2>
+            <span style="font-size:13px;color:#64748b;font-weight:600">3-Step Rapid Personalization</span>
+          </div>
+
+          <div class="onboarding-wizard-container">
+            
+            <!-- Wizard Step Nodes Indicator -->
+            <div class="wizard-steps-indicator">
+              <div class="wizard-step-node active" id="stepNode1">
+                <div class="step-circle">1</div>
+                <div class="step-node-label">Demographics</div>
+              </div>
+              <div class="wizard-step-node" id="stepNode2">
+                <div class="step-circle">2</div>
+                <div class="step-node-label">Study Habits</div>
+              </div>
+              <div class="wizard-step-node" id="stepNode3">
+                <div class="step-circle">3</div>
+                <div class="step-node-label">Scores & Goals</div>
+              </div>
+            </div>
+
+            <!-- Step 1: Personal & Demographics -->
+            <div id="wizardSection1">
+              <h3 style="font-size:16px;font-weight:800;margin-bottom:16px;">Step 1: Student Demographics</h3>
+              
+              <div class="form-group">
+                <label>Student Full Name</label>
+                <input type="text" class="form-input" id="regName" placeholder="e.g. Jordan Hayes" value="Jordan Hayes">
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Age (Years)</label>
+                  <input type="number" class="form-input" id="regAge" min="10" max="30" value="17">
+                </div>
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select class="form-select" id="regGender">
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>School Type</label>
+                  <select class="form-select" id="regSchoolType">
+                    <option value="public">Public Institution</option>
+                    <option value="private">Private Academy</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Parent Education Level</label>
+                  <select class="form-select" id="regParentEd">
+                    <option value="graduate">University Graduate</option>
+                    <option value="post graduate">Post Graduate / Master's</option>
+                    <option value="diploma">Diploma / Associate</option>
+                    <option value="high school">High School</option>
+                    <option value="phd">Doctorate / PhD</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="wizard-action-buttons">
+                <div></div>
+                <button type="button" class="btn-primary" id="btnNextStep1">Next: Study Habits →</button>
+              </div>
+            </div>
+
+            <!-- Step 2: Study Habits & Environment -->
+            <div id="wizardSection2" style="display:none;">
+              <h3 style="font-size:16px;font-weight:800;margin-bottom:16px;">Step 2: Study Habits & Environment</h3>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Daily Self-Study (Hours)</label>
+                  <input type="number" class="form-input" id="regStudyHours" step="0.5" min="0" max="15" value="4.0">
+                </div>
+                <div class="form-group">
+                  <label>Attendance Percentage (%)</label>
+                  <input type="number" class="form-input" id="regAttendance" min="0" max="100" value="88.0">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Primary Study Method</label>
+                  <select class="form-select" id="regStudyMethod">
+                    <option value="online videos">Online Video Lessons</option>
+                    <option value="notes">Notes & Summaries</option>
+                    <option value="coaching">Active Coaching</option>
+                    <option value="mixed">Mixed Multimodal</option>
+                    <option value="textbook">Textbook Reading</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Home Internet Access</label>
+                  <select class="form-select" id="regInternet">
+                    <option value="yes">Yes (High-speed)</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Daily Commute Time</label>
+                  <select class="form-select" id="regTravel">
+                    <option value="<15 min">&lt; 15 Minutes</option>
+                    <option value="15-30 min">15 – 30 Minutes</option>
+                    <option value="30-60 min">30 – 60 Minutes</option>
+                    <option value=">60 min">&gt; 60 Minutes</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Extracurricular Activities</label>
+                  <select class="form-select" id="regActivities">
+                    <option value="yes">Yes (Active participant)</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="wizard-action-buttons">
+                <button type="button" class="btn-secondary" id="btnBackStep2">← Back</button>
+                <button type="button" class="btn-primary" id="btnNextStep2">Next: Scores & Goals →</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Scores & Target -->
+            <div id="wizardSection3" style="display:none;">
+              <h3 style="font-size:16px;font-weight:800;margin-bottom:16px;">Step 3: Academic Scores & Goals</h3>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>Mathematics Score (0-100)</label>
+                  <input type="number" class="form-input" id="regMath" min="0" max="100" value="78.0">
+                </div>
+                <div class="form-group">
+                  <label>Science Score (0-100)</label>
+                  <input type="number" class="form-input" id="regScience" min="0" max="100" value="84.0">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>English Score (0-100)</label>
+                  <input type="number" class="form-input" id="regEnglish" min="0" max="100" value="86.0">
+                </div>
+                <div class="form-group">
+                  <label>Target Academic Tier</label>
+                  <select class="form-select" id="regTarget">
+                    <option value="High">Top Tier Honors (A / A+)</option>
+                    <option value="Medium">Standard Passing (B / B+)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="wizard-action-buttons">
+                <button type="button" class="btn-secondary" id="btnBackStep3">← Back</button>
+                <button type="button" class="btn-primary" id="btnFinishRegistration">✨ Generate AI Dashboard</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/charts.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/onboarding.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
