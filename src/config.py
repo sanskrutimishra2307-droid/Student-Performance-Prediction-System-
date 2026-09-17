@@ -11,9 +11,12 @@ DATA_DIR = BASE_DIR / "data"
 MODELS_DIR = BASE_DIR / "models"
 REPORTS_DIR = BASE_DIR / "reports"
 
-DATA_DIR.mkdir(exist_ok=True)
-MODELS_DIR.mkdir(exist_ok=True)
-REPORTS_DIR.mkdir(exist_ok=True)
+try:
+    DATA_DIR.mkdir(exist_ok=True)
+    MODELS_DIR.mkdir(exist_ok=True)
+    REPORTS_DIR.mkdir(exist_ok=True)
+except OSError:
+    pass
 
 DEFAULT_DATASET_PATH = DATA_DIR / "Student_Performance.csv"
 SAMPLE_BATCH_PATH = DATA_DIR / "sample_batch_students.csv"

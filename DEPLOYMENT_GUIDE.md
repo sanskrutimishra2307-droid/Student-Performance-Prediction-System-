@@ -4,7 +4,30 @@ This guide details how to deploy the **Student Performance Prediction & Learning
 
 ---
 
-## 🌟 Method 1: Deploy on Render (Recommended — Free & 1-Click)
+## ⚡ Method 1: Deploy on Vercel (Fast & Global Serverless Edge)
+
+Deploy both the interactive Web Dashboard and the FastAPI REST API Serverless Functions instantly on Vercel.
+
+### Steps:
+1. **Push your code to GitHub**:
+   ```bash
+   git add .
+   git commit -m "Add Vercel deployment configuration"
+   git push origin main
+   ```
+2. Go to **[vercel.com](https://vercel.com/)** and sign in with GitHub.
+3. Click **"Add New..."** $\rightarrow$ **"Project"**.
+4. Import your GitHub repository: `Student-Performance-Prediction-System-`.
+5. Keep Framework Preset as **"Other"** (Vercel automatically detects `vercel.json` and `api/index.py`).
+6. Click **"Deploy"**.
+7. Once deployed (~1-2 minutes), you get a fast global HTTPS URL:
+   - 🌐 **Web Dashboard:** `https://your-project.vercel.app/`
+   - 📑 **API Documentation:** `https://your-project.vercel.app/docs`
+   - 📊 **Predictions Endpoint:** `https://your-project.vercel.app/api/v1/predict`
+
+---
+
+## 🌟 Method 2: Deploy on Render (Recommended for Full Containers)
 
 Render provides free hosting with automatic HTTPS, continuous deployment from GitHub, and WebSocket/REST support.
 
