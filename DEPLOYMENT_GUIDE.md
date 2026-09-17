@@ -56,7 +56,7 @@ Render provides free hosting with automatic HTTPS, continuous deployment from Gi
 
 ## 🎈 Method 2: Deploy on Streamlit Community Cloud (Free)
 
-Ideal for hosting the Streamlit Enterprise Dashboard (`app.py`).
+Ideal for hosting the Streamlit Enterprise Dashboard (`streamlit_app.py`).
 
 ### Steps:
 1. Push your repository to GitHub.
@@ -65,12 +65,12 @@ Ideal for hosting the Streamlit Enterprise Dashboard (`app.py`).
 4. Select:
    - **Repository**: `Your-Username/Student-Performance-Prediction-System-`
    - **Branch**: `main`
-   - **Main file path**: `app.py`
+   - **Main file path**: `streamlit_app.py`
 5. Click **"Deploy!"**.
 
 ---
 
-## 🤗 Method 3: Deploy on Hugging Face Spaces (Free)
+## 🤗 Method 4: Deploy on Hugging Face Spaces (Free)
 
 Hugging Face Spaces offers free CPU hardware and instant public sharing.
 
@@ -78,13 +78,13 @@ Hugging Face Spaces offers free CPU hardware and instant public sharing.
 1. Go to **[huggingface.co/spaces](https://huggingface.co/spaces)**.
 2. Click **"Create new Space"**.
 3. Choose:
-   - **Space SDK**: `Docker` (or `Streamlit` for `app.py`)
+   - **Space SDK**: `Docker` (or `Streamlit` for `streamlit_app.py`)
    - **License**: `MIT` or `Open Source`
 4. Clone the space or connect your GitHub repo and push the files. Hugging Face will automatically build the `Dockerfile` and launch the app!
 
 ---
 
-## 🐳 Method 4: Deploy with Docker (AWS / GCP / DigitalOcean / VPS)
+## 🐳 Method 5: Deploy with Docker (AWS / GCP / DigitalOcean / VPS)
 
 You can run the entire system on any cloud server using Docker:
 
